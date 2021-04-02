@@ -1,9 +1,10 @@
-// Type definitions for @koa/cors 3.0
+// Type definitions for @koa/cors 3.1
 // Project: https://github.com/koajs/cors
 // Definitions by: Xavier Stouder <https://github.com/Xstoudi>
 //                 Izayoi Ko <https://github.com/izayoiko>
 //                 Steve Hipwell <https://github.com/stevehipwell>
 //                 Steven McDowall <https://github.com/sjmcdowall>
+//                 Stanisław Chmiela <https://github.com/sjchmiela>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
 
@@ -56,8 +57,13 @@ declare namespace cors {
 
         /**
          * `Access-Control-Allow-Credentials`
+         *
+         * @remarks
+         * If a function is provided, it will be called for each request with
+         * the koa context object. It may return a boolean or a promise that
+         * will resolve with a boolean.
          */
-        credentials?: boolean;
+        credentials?: boolean | ((ctx: Koa.Context) => boolean) | ((ctx: Koa.Context) => PromiseLike<boolean>);
 
         /**
          * Add set headers to `err.header` if an error is thrown
